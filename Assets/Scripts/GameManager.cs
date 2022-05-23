@@ -20,6 +20,13 @@ public int lives { get; private set; }
         NewRound();
     }
 
+    private void Update()
+    {
+        if(this.lives <=0 && Input.anyKeyDown) {
+            NewGame();
+        }
+    }
+
     private void NewRound()
     {
         foreach (Transform pellet in this.pellets)
