@@ -12,7 +12,7 @@ public class AnimatedSprite : MonoBehaviour
 
     private void Awake()
     {
-        this.spriteRenderer = GetComponet<SpriteRenderer>();
+        this.spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -31,7 +31,15 @@ public class AnimatedSprite : MonoBehaviour
         {
             this.animationFrame = 0;
         }
-        if(this.animationFrame >= 0 && this.animationFrame <this.sprites.Length) { 
-        this.spriteRenderer.sprite = this.sprites[this.animationFrame]};
+        if (this.animationFrame >= 0 && this.animationFrame < this.sprites.Length)
+        {
+            this.spriteRenderer.sprite = this.sprites[this.animationFrame];
+        }
+    }
+
+    public void Restart()
+    {
+        this.animationFrame = -1;
+        Advance();
     }
 }
