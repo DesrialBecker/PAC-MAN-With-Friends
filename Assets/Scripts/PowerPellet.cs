@@ -10,6 +10,7 @@ public class PowerPellet : MonoBehaviour
 		if (collider.gameObject.name == "Pacman")
 		{
 			Destroy(this.gameObject);
+			UIManager.score += PowerPellet.pointValue;
 		}
 	}
 }
