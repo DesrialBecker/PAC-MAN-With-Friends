@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ghosts : MonoBehaviour
 {
     public int points = 200;
+
 }
 
 //HELLO I LOVE COMMENTS
