@@ -10,6 +10,7 @@ public class Pellet : MonoBehaviour
 		if (collider.gameObject.name == "Pacman")
 		{
 			Destroy(this.gameObject);
+			UIManager.score += Pellet.pointValue;
 		}
 	}
 }
