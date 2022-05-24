@@ -53,7 +53,7 @@
     <UnityVersion>2022.1.1f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="D:\Microsoft\Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Movement.cs" />
@@ -62,6 +62,8 @@
     <Compile Include="Assets\Scripts\AnimatedSprite.cs" />
     <Compile Include="Assets\Scripts\Pacman.cs" />
     <Compile Include="Assets\Scripts\Ghosts.cs" />
+    <Compile Include="Assets\Scripts\Pellet.cs" />
+    <Compile Include="Assets\Scripts\PowerPellet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
