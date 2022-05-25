@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
     public static int score;
     public Text scoreText;
+    public static int lives =5;
+    public Text livesText ;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +20,18 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Score: " + score.ToString();
+        this.scoreText.text = "Score: " + score.ToString();
+        this.livesText.text = "Lives: " + lives.ToString();
     }
 
     public void AddScore(int points)
     {
         score += points;
-        Update();
+        this.Update();
     }
+    //public void LoseLife()
+    //{
+    //    lives -= 1;
+    //    Update();
+    //}
 }
