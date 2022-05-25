@@ -11714,7 +11714,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 129.8, y: -45}
+  m_AnchoredPosition: {x: 139.4, y: -46.4}
   m_SizeDelta: {x: 200.7982, y: 31.560501}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &403224167
@@ -12689,6 +12689,7 @@ GameObject:
   - component: {fileID: 935583020}
   - component: {fileID: 935583019}
   - component: {fileID: 935583018}
+  - component: {fileID: 935583022}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -12779,6 +12780,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &935583022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935583017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4f57ba3f84ce1541b48aa059adaa3ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1107546599
 GameObject:
   m_ObjectHideFlags: 0
@@ -15964,7 +15977,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 131.4, y: -56.8}
+  m_AnchoredPosition: {x: 139.7, y: -61.6}
   m_SizeDelta: {x: 200.7982, y: 31.560501}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1904310545
