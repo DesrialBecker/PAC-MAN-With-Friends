@@ -6,38 +6,34 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public static int score;
+    public GameManager _gm;
     public Text scoreText;
-    public static int lives =5;
-    public Text livesText ;
+    public Text livesText;
+
     // Start is called before the first frame update
     void Start()
     {
-        score = 0;
-        Update();
-        
+        _gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (lives <= -1)
+        if (_gm.lives <= -1)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
         else
         {
-            this.scoreText.text = "Score: " + score.ToString();
-            this.livesText.text = "Lives: " + lives.ToString();
+            this.scoreText.text = "Score: " + _gm.score.ToString();
+            this.livesText.text = "Lives: " + _gm.lives.ToString(); //idk why but this is throwing infinite null reference errors in unity debugger despite working fine. cbf to look into it more this evening
         }
     }
 
-    public void AddScore(int points)
-    {
-        score += points;
-        this.Update();
-    }
+    //public void AddScore()
+    //{
+    //    this.Update();
+    //}
     //public void LoseLife()
     //{
     //    lives -= 1;

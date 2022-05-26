@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-public Ghosts[] ghosts;
-public Pacman pacman;
-public Transform pellets;
-public int score { get; private set; }
-public int lives { get; private set; }
+    public List<Ghost> ghosts;
+    public Pacman pacman;
+    public Transform pellets;
+    public int score { get; set; }
+    public int lives { get; set; }
+    public int combo { get; set; } = 1;
 
     public void Start()
     {
@@ -22,35 +24,36 @@ public int lives { get; private set; }
 
     private void Update()
     {
-        if(this.lives <=0 && Input.anyKeyDown) {
+        if(this.lives <= 0 && Input.anyKeyDown) {
             NewGame();
         }
     }
 
     private void NewRound()
     {
-        foreach (Transform pellet in this.pellets)
+        foreach(Transform pellet in this.pellets)
         {
             pellet.gameObject.SetActive(true);
         }
+        ghosts = FindObjectsOfType<Ghost>().ToList();
         ResetState();
         
     }
 
     private void ResetState()
     {
-        for (int i = 0; i < this.ghosts.Length; i++)
+        foreach(Ghost ghost in ghosts)
         {
-            this.ghosts[i].gameObject.SetActive(true);
+            ghost.gameObject.SetActive(true);
         }
         this.pacman.gameObject.SetActive(true);
     }
 
     private void GameOver()
     {
-        for (int i = 0; i < this.ghosts.Length; i++)
+        foreach(Ghost ghost in ghosts)
         {
-            this.ghosts[i].gameObject.SetActive(false);
+            ghost.gameObject.SetActive(false);
         }
         this.pacman.gameObject.SetActive(false);
     }
@@ -59,26 +62,44 @@ public int lives { get; private set; }
     {
         this.score = score;
     }
+    public void AddScore(int points)
+    {
+        this.score += points;
+    }
 
     private void SetLives(int lives)
     {
         this.lives = lives;
     }
 
-    public void GhostEaten(Ghosts ghosts)
+    public void GhostEaten()
     {
-        SetScore(this.score + ghosts.points);
+        AddScore(Ghost.pointValue * this.combo);
+    }
+    public void PelletEaten()
+	{
+        this.AddScore(Pellet.pointValue);
+	}
+    public void PowerPelletEaten()
+    {
+        foreach (Ghost ghost in ghosts)
+		{
+            ghost.state = Ghost.GhostState.Afraid;
+		}
+        this.AddScore(PowerPellet.pointValue);
     }
     public void PacmanEaten()
     {
         this.pacman.gameObject.SetActive(false);
-        SetLives(this.lives-1);
-        if(this.lives > 0)
+        SetLives(this.lives - 1);
+        if (this.lives > 0)
         {
             Invoke(nameof(ResetState), 3.0f);
-        }else{
+        }
+        else
+        {
             GameOver();
-            }
+        }
     }
    
 }
