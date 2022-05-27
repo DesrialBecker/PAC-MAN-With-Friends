@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
     {
         NewGame();
     }
-    private void NewGame() {
+
+    private void NewGame() 
+    {
         SetScore(0);
         SetLives(3);
         NewRound();
@@ -83,22 +85,25 @@ public class GameManager : MonoBehaviour
     {
         foreach (Ghost ghost in ghosts)
 		{
-            ghost.state = Ghost.GhostState.Afraid;
+            ghost.State = Ghost.GhostState.Afraid;
 		}
         this.AddScore(PowerPellet.pointValue);
         AllPelletsEaten();
     }
 
-    public void LoadNextLevel(){
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-
-    public void AllPelletsEaten(){
-        if(this.pellets.childCount == 0 && this.powerPellets.childCount==0){
+    public void AllPelletsEaten()
+    {
+        if(this.pellets.childCount == 0 && this.powerPellets.childCount == 0)
+        {
            LoadNextLevel();
         }
     }
+
     public void PacmanEaten()
     {
         this.pacman.gameObject.SetActive(false);

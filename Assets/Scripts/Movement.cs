@@ -20,12 +20,12 @@ public class Movement : MonoBehaviour
 
     private void Awake()
     {
-        this.rigidbody = GetComponent<Rigidbody2D>();
-        this.startingPosition = this.transform.position;
+        startingPosition = this.transform.position;
     }
 
     private void Start()
     {
+        rigidbody = GetComponent<Rigidbody2D>();
         ResetState();
     }
 
