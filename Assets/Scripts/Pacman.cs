@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pacman : MonoBehaviour
 {
+
     public Movement Movement;
     public Transform responConnection;
 
