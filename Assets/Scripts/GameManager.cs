@@ -131,8 +131,6 @@ public class GameManager : MonoBehaviour
         positionInky.x = this.inkyRespawnPoint.position.x;
         positionInky.y = this.inkyRespawnPoint.position.y;
         this.inky.transform.position = positionInky;
-        
-        
     }
     
 
