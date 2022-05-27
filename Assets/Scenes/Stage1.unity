@@ -16001,6 +16001,8 @@ MonoBehaviour:
   ghosts: []
   pacman: {fileID: 1922598871}
   pellets: {fileID: 1713329028}
+  powerPellets: {fileID: 0}
+  respawnPoint: {fileID: 56765251}
 --- !u!4 &1765698550
 Transform:
   m_ObjectHideFlags: 0
