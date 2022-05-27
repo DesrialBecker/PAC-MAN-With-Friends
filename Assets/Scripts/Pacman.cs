@@ -5,7 +5,6 @@ using UnityEngine;
 public class Pacman : MonoBehaviour
 {
     public Movement movement { get; private set; }
-    public Transform responConnection;
 
     private void Awake()
     {

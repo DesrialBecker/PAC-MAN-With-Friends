@@ -8,11 +8,19 @@ public class GameManager : MonoBehaviour
 {
     public List<Ghost> ghosts;
     [SerializeField] public Pacman pacman;
+    [SerializeField] public Ghost blinky;
+    [SerializeField] public Ghost clyde;
+    [SerializeField] public Ghost pinky;
+    [SerializeField] public Ghost inky;
     public Transform pellets;
     public Transform powerPellets;
-    [SerializeField] public Transform respawnPoint;
-    public int score { get; set; }
+    [SerializeField] public Transform pacmanRespawnPoint;
+    [SerializeField] public Transform blinkyRespawnPoint;
+    [SerializeField] public Transform clydeRespawnPoint;
+    [SerializeField] public Transform pinkyRespawnPoint;
+    [SerializeField] public Transform inkyRespawnPoint;
     public int lives { get; set; }
+    public int score { get; set; }
     public int combo { get; set; } = 1;
 
     public void Start()
@@ -43,20 +51,47 @@ public class GameManager : MonoBehaviour
 
     private void ResetState()
     {
-
-        foreach(Ghost ghost in ghosts)
-        {
-            ghost.gameObject.SetActive(true);
-        }
+        RespawnGhost();
         this.pacman.gameObject.SetActive(true);
         RespawnPacman();
+
+        
+        
+   }
+    public void RespawnGhost()
+    {
+        Vector3 positionBlinky = this.blinky.transform.position;
+        this.blinky.gameObject.SetActive(true);
+        positionBlinky.x = this.blinkyRespawnPoint.position.x;
+        positionBlinky.y = this.blinkyRespawnPoint.position.y;
+        this.blinky.transform.position = positionBlinky;
+        
+        
+        Vector3 positionClyde = this.clyde.transform.position;
+        this.clyde.gameObject.SetActive(true);
+        positionClyde.x = this.clydeRespawnPoint.position.x;
+        positionClyde.y = this.clydeRespawnPoint.position.y;
+        this.clyde.transform.position = positionClyde;
+
+        Vector3 positionPinky = this.pinky.transform.position;
+        this.pinky.gameObject.SetActive(true);
+        positionPinky.x = this.pinkyRespawnPoint.position.x;
+        positionPinky.y = this.pinkyRespawnPoint.position.y;
+        this.pinky.transform.position = positionPinky;
+        
+        Vector3 positionInky = this.inky.transform.position;
+        this.inky.gameObject.SetActive(true);
+        positionInky.x = this.inkyRespawnPoint.position.x;
+        positionInky.y = this.inkyRespawnPoint.position.y;
+        this.inky.transform.position = positionInky;
+        
         
     }
     public void RespawnPacman()
     {
         Vector3 position = this.pacman.transform.position;
-        position.x = this.respawnPoint.position.x;
-        position.y = this.respawnPoint.position.y;
+        position.x = this.pacmanRespawnPoint.position.x;
+        position.y = this.pacmanRespawnPoint.position.y;
         this.pacman.transform.position = position;
         this.pacman.movement.ResetState();
     }
@@ -115,10 +150,11 @@ public class GameManager : MonoBehaviour
     public void PacmanEaten()
     {
         this.pacman.gameObject.SetActive(false);
-        
+
         SetLives(this.lives - 1);
         if (this.lives > 0)
         {
+            //RespawnGhost();
             Invoke(nameof(ResetState), 3.0f);
             
         }
