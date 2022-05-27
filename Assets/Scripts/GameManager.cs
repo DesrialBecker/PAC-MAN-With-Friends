@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
         position.x = this.pacmanRespawnPoint.position.x;
         position.y = this.pacmanRespawnPoint.position.y;
         this.pacman.transform.position = position;
-        this.pacman.movement.ResetState();
+        this.pacman.Movement.ResetState();
     }
 
     private void GameOver()
@@ -182,7 +182,17 @@ public class GameManager : MonoBehaviour
             ghost.State = Ghost.GhostState.Afraid;
 		}
         this.AddScore(PowerPellet.pointValue);
+        
+        
         AllPelletsEaten();
+        Invoke(nameof(ChangeGhostStateToChase), 10.0f);
+    }
+    public void ChangeGhostStateToChase()
+    {
+        foreach(Ghost ghost in ghosts)
+        {
+            ghost.State=Ghost.GhostState.Chase;
+        }
     }
 
     public void LoadNextLevel()
