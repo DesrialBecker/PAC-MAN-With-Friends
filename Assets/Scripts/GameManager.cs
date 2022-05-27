@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public List<Ghost> ghosts;
-    public Pacman pacman;
+    [SerializeField] public Pacman pacman;
     public Transform pellets;
     public Transform powerPellets;
+    [SerializeField] public Transform respawnPoint;
     public int score { get; set; }
     public int lives { get; set; }
     public int combo { get; set; } = 1;
@@ -42,11 +43,22 @@ public class GameManager : MonoBehaviour
 
     private void ResetState()
     {
+
         foreach(Ghost ghost in ghosts)
         {
             ghost.gameObject.SetActive(true);
         }
         this.pacman.gameObject.SetActive(true);
+        RespawnPacman();
+        
+    }
+    public void RespawnPacman()
+    {
+        Vector3 position = this.pacman.transform.position;
+        position.x = this.respawnPoint.position.x;
+        position.y = this.respawnPoint.position.y;
+        this.pacman.transform.position = position;
+        this.pacman.movement.ResetState();
     }
 
     private void GameOver()
@@ -99,13 +111,16 @@ public class GameManager : MonoBehaviour
            LoadNextLevel();
         }
     }
+
     public void PacmanEaten()
     {
         this.pacman.gameObject.SetActive(false);
+        
         SetLives(this.lives - 1);
         if (this.lives > 0)
         {
             Invoke(nameof(ResetState), 3.0f);
+            
         }
         else
         {
