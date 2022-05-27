@@ -11729,6 +11729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41567da252309e469d477c76f16d401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gm: {fileID: 0}
   scoreText: {fileID: 1904310545}
   livesText: {fileID: 403224168}
 --- !u!114 &403224168
@@ -11773,6 +11774,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 403224165}
   m_CullTransparentMesh: 1
+--- !u!1 &414403977 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 729022610887040410, guid: af7c4b9d10993084e980d05de6802ace, type: 3}
+  m_PrefabInstance: {fileID: 1250986733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &414403981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414403977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5649a53dc844104493c1b116b383bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &434105558
 GameObject:
   m_ObjectHideFlags: 0
@@ -11943,7 +11961,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost_Inky
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3020862261943753456, guid: a903b39013ec99941b6392c6251af808, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a903b39013ec99941b6392c6251af808, type: 3}
 --- !u!4 &656152906 stripped
 Transform:
@@ -11981,6 +12000,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &656152913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656152907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5649a53dc844104493c1b116b383bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &687894977
 GameObject:
   m_ObjectHideFlags: 0
@@ -12534,7 +12565,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost_Pinky
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2743109870366582263, guid: 2c96f1abcc5e2404f82718a5e10c9f8c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2c96f1abcc5e2404f82718a5e10c9f8c, type: 3}
 --- !u!4 &723896553 stripped
 Transform:
@@ -12572,6 +12604,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &723896560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723896554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5649a53dc844104493c1b116b383bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &837710618 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1932671201837111698, guid: af7c4b9d10993084e980d05de6802ace, type: 3}
+  m_PrefabInstance: {fileID: 1250986733}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &840074445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12639,7 +12688,8 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.93333334
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8692715229873808011, guid: e82909bde39c28d47afa75a9b240890a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e82909bde39c28d47afa75a9b240890a, type: 3}
 --- !u!4 &840074446 stripped
 Transform:
@@ -12677,6 +12727,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &840074453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840074447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5649a53dc844104493c1b116b383bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &935583017
 GameObject:
   m_ObjectHideFlags: 0
@@ -13164,13 +13226,26 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6749406644727378783, guid: af7c4b9d10993084e980d05de6802ace, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: af7c4b9d10993084e980d05de6802ace, type: 3}
 --- !u!4 &1250986734 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7589191224117912852, guid: af7c4b9d10993084e980d05de6802ace, type: 3}
   m_PrefabInstance: {fileID: 1250986733}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1250986740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837710618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5649a53dc844104493c1b116b383bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1525239086
 GameObject:
   m_ObjectHideFlags: 0
@@ -16034,6 +16109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41567da252309e469d477c76f16d401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gm: {fileID: 0}
   scoreText: {fileID: 1904310545}
   livesText: {fileID: 0}
 --- !u!1 &1922598866

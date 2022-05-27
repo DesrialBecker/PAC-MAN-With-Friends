@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public List<Ghost> ghosts;
     public Pacman pacman;
     public Transform pellets;
+    public Transform powerPellets;
     public int score { get; set; }
     public int lives { get; set; }
     public int combo { get; set; } = 1;
@@ -24,9 +26,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(this.lives <= 0 && Input.anyKeyDown) {
-            NewGame();
-        }
+    
     }
 
     private void NewRound()
@@ -51,11 +51,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        foreach(Ghost ghost in ghosts)
-        {
-            ghost.gameObject.SetActive(false);
-        }
-        this.pacman.gameObject.SetActive(false);
+        SceneManager.LoadScene(0);
     }
     
     private void SetScore(int score)
@@ -76,10 +72,13 @@ public class GameManager : MonoBehaviour
     {
         AddScore(Ghost.pointValue * this.combo);
     }
+
     public void PelletEaten()
 	{
         this.AddScore(Pellet.pointValue);
+        AllPelletsEaten();
 	}
+
     public void PowerPelletEaten()
     {
         foreach (Ghost ghost in ghosts)
@@ -87,6 +86,18 @@ public class GameManager : MonoBehaviour
             ghost.state = Ghost.GhostState.Afraid;
 		}
         this.AddScore(PowerPellet.pointValue);
+        AllPelletsEaten();
+    }
+
+    public void LoadNextLevel(){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+
+    public void AllPelletsEaten(){
+        if(this.pellets.childCount == 0 && this.powerPellets.childCount==0){
+           LoadNextLevel();
+        }
     }
     public void PacmanEaten()
     {
