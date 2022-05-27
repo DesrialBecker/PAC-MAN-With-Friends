@@ -5,14 +5,14 @@ using UnityEngine;
 public class Ghost : MonoBehaviour
 {
     public static int pointValue { get; set; } = 200;
-	public GhostState state { get; set; } = GhostState.Waiting;
-	/* chase= normal mode
-	 * afraid=PowerPellet mode
-	 * dead = Returning to box mode
-	 * waiting = waiting to get out of box mode
-	*/
+
+	public GhostState State;
 	private GameManager _gm;
 
+	private void Awake()
+	{
+		State = GhostState.Waiting;
+	}
 	private void Start()
 	{
 		_gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -22,7 +22,7 @@ public class Ghost : MonoBehaviour
 	{
 		if (collider.gameObject.name == "Pacman")
 		{
-			if (this.state == GhostState.Afraid)
+			if (this.State == GhostState.Afraid)
 			{
 				_gm.GhostEaten();
 				//this.Reset(); //cannot use this until respawn is added, otherwise the ghost is deactivated and immediately reactivated in the same location with Waiting state and kills pacman
@@ -41,13 +41,14 @@ public class Ghost : MonoBehaviour
 		this.gameObject.SetActive(false);
 		//TODO: location to spawn
 		this.gameObject.SetActive(true);
-		this.state = GhostState.Waiting;
+		this.State = GhostState.Waiting;
 	}
 
 	public enum GhostState
 	{
 		Chase,
 		Afraid,
-		Waiting
+		Waiting,
+		Dead
 	}
 }
