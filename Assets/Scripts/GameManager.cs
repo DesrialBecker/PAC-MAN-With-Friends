@@ -51,6 +51,18 @@ public class GameManager : MonoBehaviour
 
     private void ResetState()
     {
+
+        //This part is if we want to add in enhancement for extra ghosts in the future
+        /*
+        int id=0;
+        
+        foreach(Ghost ghost in ghosts)
+        {
+            int id++;
+            ghost.gameObject.SetActive(true);
+            RespawnGhost(id);
+        }
+        */
         RespawnGhost();
         this.pacman.gameObject.SetActive(true);
         RespawnPacman();
@@ -58,7 +70,42 @@ public class GameManager : MonoBehaviour
         
         
    }
-    public void RespawnGhost()
+
+    /*public void RespawnGhost(int id)
+    {
+        switch (id) { 
+            case 1:
+        Vector3 positionBlinky = this.blinky.transform.position;
+        this.blinky.gameObject.SetActive(true);
+        positionBlinky.x = this.blinkyRespawnPoint.position.x;
+        positionBlinky.y = this.blinkyRespawnPoint.position.y;
+        this.blinky.transform.position = positionBlinky;
+            break;
+            case 2:
+        Vector3 positionClyde = this.clyde.transform.position;
+        this.clyde.gameObject.SetActive(true);
+        positionClyde.x = this.clydeRespawnPoint.position.x;
+        positionClyde.y = this.clydeRespawnPoint.position.y;
+        this.clyde.transform.position = positionClyde;
+            break;
+            case 3:
+        Vector3 positionPinky = this.pinky.transform.position;
+        this.pinky.gameObject.SetActive(true);
+        positionPinky.x = this.pinkyRespawnPoint.position.x;
+        positionPinky.y = this.pinkyRespawnPoint.position.y;
+        this.pinky.transform.position = positionPinky;
+            break;
+            case 4:
+        Vector3 positionInky = this.inky.transform.position;
+        this.inky.gameObject.SetActive(true);
+        positionInky.x = this.inkyRespawnPoint.position.x;
+        positionInky.y = this.inkyRespawnPoint.position.y;
+        this.inky.transform.position = positionInky;
+            break;
+        }
+    }
+    */
+     public void RespawnGhost()
     {
         Vector3 positionBlinky = this.blinky.transform.position;
         this.blinky.gameObject.SetActive(true);
@@ -87,6 +134,8 @@ public class GameManager : MonoBehaviour
         
         
     }
+    
+
     public void RespawnPacman()
     {
         Vector3 position = this.pacman.transform.position;
