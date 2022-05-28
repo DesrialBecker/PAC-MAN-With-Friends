@@ -142,7 +142,9 @@ public class GameManager : MonoBehaviour
         position.x = this.pacmanRespawnPoint.position.x;
         position.y = this.pacmanRespawnPoint.position.y;
         this.pacman.transform.position = position;
-        this.pacman.Movement.ResetState();
+        this.pacman._movement.ResetState();
+
+        this.pacman._animator.SetTrigger("Walk");
     }
 
     private void GameOver()
@@ -183,15 +185,15 @@ public class GameManager : MonoBehaviour
 		}
         this.AddScore(PowerPellet.pointValue);
         
-        
         AllPelletsEaten();
         Invoke(nameof(ChangeGhostStateToChase), 10.0f);
     }
+
     public void ChangeGhostStateToChase()
     {
         foreach(Ghost ghost in ghosts)
         {
-            ghost.State=Ghost.GhostState.Chase;
+            ghost.State = Ghost.GhostState.Chase;
         }
     }
 
@@ -210,19 +212,18 @@ public class GameManager : MonoBehaviour
 
     public void PacmanEaten()
     {
-        this.pacman.gameObject.SetActive(false);
-
+        this.pacman._animator.SetTrigger("Death");
         SetLives(this.lives - 1);
         if (this.lives > 0)
         {
             //RespawnGhost();
             Invoke(nameof(ResetState), 3.0f);
-            
+
         }
         else
         {
             GameOver();
         }
     }
-   
+
 }
