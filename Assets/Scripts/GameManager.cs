@@ -37,7 +37,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-    
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            LoadNextLevel();
+        }
+
+        AllPelletsEaten();
     }
 
     private void NewRound()
@@ -194,7 +199,6 @@ public class GameManager : MonoBehaviour
 		}
         this.AddScore(PowerPellet.pointValue);
         
-        AllPelletsEaten();
         Invoke(nameof(ChangeGhostStateToChase), 10.0f);
     }
 
@@ -208,14 +212,15 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        int currentScene = SceneManager.GetActiveScene().buildIndex + 1;
+        SceneManager.LoadScene(currentScene);
     }
 
     public void AllPelletsEaten()
     {
-        if(this.pellets.childCount == 0 && this.powerPellets.childCount == 0)
+      if(this.pellets.childCount == 0 && this.powerPellets.childCount == 0)
         {
-           LoadNextLevel();
+            LoadNextLevel();
         }
     }
 
