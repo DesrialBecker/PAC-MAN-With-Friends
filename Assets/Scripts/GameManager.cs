@@ -46,6 +46,10 @@ public class GameManager : MonoBehaviour
         {
             pellet.gameObject.SetActive(true);
         }
+        foreach (Transform powerPellet in this.powerPellets)
+        {
+            powerPellet.gameObject.SetActive(true);
+        }
 
         ghosts = FindObjectsOfType<Ghost>().ToList();
         ResetState();
