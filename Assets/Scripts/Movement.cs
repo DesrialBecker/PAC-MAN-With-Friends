@@ -57,13 +57,11 @@ public class Movement : MonoBehaviour
 
     public void SetDirection(Vector2 direction, bool forced = false)
     {
-        if (forced || !Occupied(direction))
-        {
+        if (forced || !Occupied(direction)){
             this.direction = direction;
             this.nextDirection = Vector2.zero;
         }
-        else
-        {
+        else{
             this.nextDirection = direction;
         }
     }

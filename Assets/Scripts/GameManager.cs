@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (Ghost ghost in ghosts)
 		{
-            ghost.State = Ghost.GhostState.Afraid;
+            ghost.State = Ghost.GhostState.Frightened;
 		}
         this.AddScore(PowerPellet.pointValue);
         
@@ -207,6 +207,7 @@ public class GameManager : MonoBehaviour
         if(this.pellets.childCount == 0 && this.powerPellets.childCount == 0)
         {
            LoadNextLevel();
+           lives+=100;
         }
     }
 

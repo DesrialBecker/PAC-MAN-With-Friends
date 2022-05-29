@@ -8,10 +8,12 @@ public class Ghost : MonoBehaviour
 
 	public GhostState State;
 	private GameManager _gm;
+	public Movement movement;
 
 	private void Awake()
 	{
 		State = GhostState.Waiting;
+		movement = GetComponent<Movement>();
 	}
 	private void Start()
 	{
@@ -22,7 +24,7 @@ public class Ghost : MonoBehaviour
 	{
 		if (collider.gameObject.name == "Pacman")
 		{
-			if (this.State == GhostState.Afraid)
+			if (this.State == GhostState.Frightened)
 			{
 				_gm.GhostEaten();
 				//this.Reset(); //cannot use this until respawn is added, otherwise the ghost is deactivated and immediately reactivated in the same location with Waiting state and kills pacman
@@ -47,8 +49,10 @@ public class Ghost : MonoBehaviour
 	public enum GhostState
 	{
 		Chase,
-		Afraid,
+		Frightened,
 		Waiting,
-		Dead
+		Dead,
+		Scatter,
+		Home
 	}
 }
