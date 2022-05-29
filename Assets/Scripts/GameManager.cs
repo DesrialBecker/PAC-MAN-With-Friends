@@ -7,13 +7,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public List<Ghost> ghosts;
+    public Transform pellets;
+    public Transform powerPellets;
     [SerializeField] public Pacman pacman;
     [SerializeField] public Ghost blinky;
     [SerializeField] public Ghost clyde;
     [SerializeField] public Ghost pinky;
     [SerializeField] public Ghost inky;
-    public Transform pellets;
-    public Transform powerPellets;
     [SerializeField] public Transform pacmanRespawnPoint;
     [SerializeField] public Transform blinkyRespawnPoint;
     [SerializeField] public Transform clydeRespawnPoint;
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Transform inkyRespawnPoint;
     public int lives { get; set; }
     public int score { get; set; }
-    public int combo { get; set; } = 1;
+    public int combo { get; set; }
 
     public void Start()
     {
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         }
         ghosts = FindObjectsOfType<Ghost>().ToList();
         ResetState();
-        
+        combo = 1;
     }
 
     private void ResetState()
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
         
         
-   }
+    }
 
     /*public void RespawnGhost(int id)
     {
@@ -108,13 +108,12 @@ public class GameManager : MonoBehaviour
     }
     */
      public void RespawnGhost()
-    {
+     {
         Vector3 positionBlinky = this.blinky.transform.position;
         this.blinky.gameObject.SetActive(true);
         positionBlinky.x = this.blinkyRespawnPoint.position.x;
         positionBlinky.y = this.blinkyRespawnPoint.position.y;
         this.blinky.transform.position = positionBlinky;
-        
         
         Vector3 positionClyde = this.clyde.transform.position;
         this.clyde.gameObject.SetActive(true);
@@ -133,7 +132,7 @@ public class GameManager : MonoBehaviour
         positionInky.x = this.inkyRespawnPoint.position.x;
         positionInky.y = this.inkyRespawnPoint.position.y;
         this.inky.transform.position = positionInky;
-    }
+     }
     
 
     public void RespawnPacman()
