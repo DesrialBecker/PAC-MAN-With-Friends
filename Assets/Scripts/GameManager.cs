@@ -46,9 +46,15 @@ public class GameManager : MonoBehaviour
         {
             pellet.gameObject.SetActive(true);
         }
+
         ghosts = FindObjectsOfType<Ghost>().ToList();
         ResetState();
         combo = 1;
+    }
+
+    private void SpawnFruit()
+	{
+        
     }
 
     private void ResetState()
