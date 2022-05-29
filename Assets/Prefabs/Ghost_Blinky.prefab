@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3168591754488838480, guid: 12a98270b627dbf4ea6fcd28b0934fd2, type: 3}
+      propertyPath: duration
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1560697427877715428, guid: 12a98270b627dbf4ea6fcd28b0934fd2, type: 3}
       propertyPath: initialDirection.x
       value: -1
@@ -27,6 +31,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -2
       objectReference: {fileID: 0}
+    - target: {fileID: 3195561716420428295, guid: 12a98270b627dbf4ea6fcd28b0934fd2, type: 3}
+      propertyPath: State
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195561716420428295, guid: 12a98270b627dbf4ea6fcd28b0934fd2, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 6615284004230722710, guid: 6b4553ab48516b1468f01898cd678531, type: 3}
     - target: {fileID: 4557016499833351022, guid: 12a98270b627dbf4ea6fcd28b0934fd2, type: 3}
       propertyPath: m_RootOrder
       value: 0

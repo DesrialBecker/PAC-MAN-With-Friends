@@ -118,6 +118,10 @@ GameObject:
   - component: {fileID: 1560697427877715428}
   - component: {fileID: 3195561716420428295}
   - component: {fileID: -3168591754488838480}
+  - component: {fileID: 6559350430338293678}
+  - component: {fileID: 1103818967373298640}
+  - component: {fileID: 2900424026187382791}
+  - component: {fileID: -8145705176260234053}
   m_Layer: 7
   m_Name: Ghost_Base
   m_TagString: Untagged
@@ -211,7 +215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5649a53dc844104493c1b116b383bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 0
+  State: 5
+  movement: {fileID: 0}
+  target: {fileID: 6615284004230722710, guid: 6b4553ab48516b1468f01898cd678531, type: 3}
 --- !u!114 &-3168591754488838480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +231,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0
+--- !u!114 &6559350430338293678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5529792927934879720}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be96eceb8ccf79e4d89a3a759d2a9837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 20
+--- !u!114 &1103818967373298640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5529792927934879720}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3113cc66d31b8054cb67f6e42c1cadef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 7
+--- !u!114 &2900424026187382791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5529792927934879720}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806df314968a2349a6d346728b9ddd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 8
+  body: {fileID: 0}
+  eyes: {fileID: 0}
+  blue: {fileID: 0}
+  white: {fileID: 0}
+  pinkyRespawnPoint: {fileID: 0}
+  eaten: 0
+--- !u!114 &-8145705176260234053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5529792927934879720}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7787e329016fc044882bc589c5333713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0
+  inside: {fileID: 0}
+  outside: {fileID: 0}
 --- !u!1 &6661383890889872352
 GameObject:
   m_ObjectHideFlags: 0

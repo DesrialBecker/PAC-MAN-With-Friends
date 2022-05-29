@@ -9,6 +9,7 @@ public class Ghost : MonoBehaviour
 	public GhostState State;
 	private GameManager _gm;
 	public Movement movement;
+	public Transform target;
 
 	private void Awake()
 	{
@@ -45,6 +46,12 @@ public class Ghost : MonoBehaviour
 		this.gameObject.SetActive(true);
 		this.State = GhostState.Waiting;
 	}
+	    public void SetPosition(Vector3 position)
+    {
+        // Keep the z-position the same since it determines draw depth
+        position.z = transform.position.z;
+        transform.position = position;
+    }
 
 	public enum GhostState
 	{
@@ -53,6 +60,6 @@ public class Ghost : MonoBehaviour
 		Waiting,
 		Dead,
 		Scatter,
-		Home
+		Home,
 	}
 }
