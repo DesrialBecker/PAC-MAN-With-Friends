@@ -115,8 +115,9 @@ GameObject:
   - component: {fileID: 4557016499833351022}
   - component: {fileID: 2657339978620070152}
   - component: {fileID: 3100012811173119669}
-  - component: {fileID: 848166551382441253}
   - component: {fileID: 1560697427877715428}
+  - component: {fileID: 3195561716420428295}
+  - component: {fileID: -3168591754488838480}
   m_Layer: 7
   m_Name: Ghost_Base
   m_TagString: Untagged
@@ -180,19 +181,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &848166551382441253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5529792927934879720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbda1d34d685ffe4b899ca6ccb3ff729, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  points: 200
 --- !u!114 &1560697427877715428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +199,31 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &3195561716420428295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5529792927934879720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5649a53dc844104493c1b116b383bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  State: 0
+--- !u!114 &-3168591754488838480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5529792927934879720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd4ce7c232332c479d5caf6f6dad90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6661383890889872352
 GameObject:
   m_ObjectHideFlags: 0
