@@ -6,6 +6,7 @@ public class PowerPellet : MonoBehaviour
 {
 	public static int pointValue = 50;
 	private GameManager _gm;
+	public float duration = 8.0f;
 	private void Start()
 	{
 		_gm = GameObject.Find("GameManager").GetComponent<GameManager>();
