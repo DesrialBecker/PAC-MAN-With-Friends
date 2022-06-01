@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Ghost> ghosts;
+    public Ghost[] ghosts;
     public Transform pellets;
     public Transform powerPellets;
     [SerializeField] public Pacman pacman;
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Transform inkyRespawnPoint;
     public int lives { get; set; }
     public int score { get; set; }
-    public int combo { get; set; }
+    public int combo { get; set; } = 1;
 
     public void Start()
     {
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
             powerPellet.gameObject.SetActive(true);
         }
 
-        ghosts = FindObjectsOfType<Ghost>().ToList();
+        //ghosts = FindObjectsOfType<Ghost>().ToList();
         ResetState();
         combo = 1;
     }
@@ -80,8 +80,17 @@ public class GameManager : MonoBehaviour
             RespawnGhost(id);
         }
         */
-        RespawnGhost();
+
+        for (int i = 0; i < this.ghosts.Length; i++)
+        {
+
+            this.ghosts[i].ResetState();
+        }
         this.pacman.gameObject.SetActive(true);
+        this.pacman.ResetState();
+
+
+        RespawnGhost();
         RespawnPacman();
 
         
@@ -147,7 +156,8 @@ public class GameManager : MonoBehaviour
         positionInky.x = this.inkyRespawnPoint.position.x;
         positionInky.y = this.inkyRespawnPoint.position.y;
         this.inky.transform.position = positionInky;
-     }
+
+    }
     
 
     public void RespawnPacman()
@@ -164,6 +174,7 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         SceneManager.LoadScene(0);
+
     }
     
     private void SetScore(int score)
@@ -180,9 +191,16 @@ public class GameManager : MonoBehaviour
         this.lives = lives;
     }
 
-    public void GhostEaten()
+    public void GhostEaten(Ghost ghost)
     {
-        AddScore(Ghost.pointValue * this.combo);
+        int points = ghost.pointValue * combo;
+        AddScore(ghost.pointValue);
+        combo++;
+        Invoke(nameof(ResetCombo), 10.0f);
+    }
+    public void ResetCombo()
+    {
+        combo = 1;
     }
 
     public void PelletEaten()
@@ -194,19 +212,19 @@ public class GameManager : MonoBehaviour
     public void PowerPelletEaten()
     {
         foreach (Ghost ghost in ghosts)
-		{
-            ghost.State = Ghost.GhostState.Afraid;
-		}
+        {
+            ghost.frightened.Enable();
+        }
         this.AddScore(PowerPellet.pointValue);
-        
+
         Invoke(nameof(ChangeGhostStateToChase), 10.0f);
     }
 
     public void ChangeGhostStateToChase()
     {
-        foreach(Ghost ghost in ghosts)
+        foreach (Ghost ghost in ghosts)
         {
-            ghost.State = Ghost.GhostState.Chase;
+            ghost.chase.Enable();
         }
     }
 
@@ -227,6 +245,7 @@ public class GameManager : MonoBehaviour
     public void PacmanEaten()
     {
         this.pacman._animator.SetTrigger("Death");
+        this.pacman._movement.speed = 0f;
         SetLives(this.lives - 1);
         if (this.lives > 0)
         {
