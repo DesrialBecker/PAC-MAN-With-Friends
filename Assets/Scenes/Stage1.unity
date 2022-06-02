@@ -11850,7 +11850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3999687737892059697, guid: a903b39013ec99941b6392c6251af808, type: 3}
       propertyPath: initialDirection.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7968219703846400061, guid: a903b39013ec99941b6392c6251af808, type: 3}
       propertyPath: m_Name
@@ -12789,7 +12789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4070276674616395062, guid: 2c96f1abcc5e2404f82718a5e10c9f8c, type: 3}
       propertyPath: initialDirection.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4281667882893652755, guid: 2c96f1abcc5e2404f82718a5e10c9f8c, type: 3}
       propertyPath: m_Color.b
@@ -12973,7 +12973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7408217447637008970, guid: e82909bde39c28d47afa75a9b240890a, type: 3}
       propertyPath: initialDirection.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8692715229873808011, guid: e82909bde39c28d47afa75a9b240890a, type: 3}
