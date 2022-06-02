@@ -6,74 +6,80 @@ public class Ghost : MonoBehaviour
 {
 	//I changed this script to hold references to all of the other ghost behaviors. I think keeping logic outside of these base classes is a good idea. Not sure to be honest though -CM 6/1/2022
 
-	public Movement movement { get; private set; }
-	public GhostHome home { get; private set; }
-	public GhostScatter scatter { get; private set; }
-	public GhostChase chase { get; private set; }
-	public GhostFrightened frightened { get; private set; }
+	public int OptimalDirectionThreshold { get; set; } = 2; //Putting this in ghost because it allows for ghosts of different intelligence. Sets number of optimal paths before sub-optimal path chosen
+	public int TurnsSinceLastSuboptimalDirection { get; set; }
+	public bool ChooseSuboptimalDirection { get; private set; }
+	public Movement Movement { get; private set; }
+	public GhostHome Home { get; private set; }
+	public GhostScatter Scatter { get; private set; }
+	public GhostChase Chase { get; private set; }
+	public GhostFrightened Frightened { get; private set; }
 
 	public GhostBehavior initialBehavior;
-	//This is the object that the ghost will be targeting -CM 6/1/2022
-	public Transform target;
-	public int pointValue { get; set; } = 200;
+	public Transform target; //This is the object that the ghost will be targeting -CM 6/1/2022
+	public int PointValue { get; set; } = 200;
 
+	private GameManager _gm;
 
 	//public GhostState State;
-	private GameManager _gm;
 
 	private void Awake()
 	{
-		this.movement = GetComponent<Movement>();
-		this.home = GetComponent<GhostHome>();
-		this.scatter = GetComponent<GhostScatter>();
-		this.chase = GetComponent<GhostChase>();
-		this.frightened = GetComponent<GhostFrightened>();
+		this.Movement = GetComponent<Movement>();
+		this.Home = GetComponent<GhostHome>();
+		this.Scatter = GetComponent<GhostScatter>();
+		this.Chase = GetComponent<GhostChase>();
+		this.Frightened = GetComponent<GhostFrightened>();
 		_gm = GetComponent<GameManager>();
-
 		//State = GhostState.Waiting;
 	}
 
 	
-	private void Start() {
+	private void Start() 
+	{
 		ResetState();
 	}
+
 	public void ResetState()
 	{
 		gameObject.SetActive(true);
 		initialBehavior.Enable();
-		movement.ResetState();
-		frightened.Disable();
-		chase.Disable();
-		scatter.Enable();
+		Movement.ResetState();
 
-		if (home == this.initialBehavior)
-		this.home.Enable();
+		Frightened.Disable();
+		Chase.Disable();
+		Scatter.Enable();
 
+		TurnsSinceLastSuboptimalDirection = 0;
+		ChooseSuboptimalDirection = false;
 
-        if (home != this.initialBehavior)
+		if (Home == this.initialBehavior)
+		{
+			this.Home.Enable();
+		}
+
+		if (this.Home != this.initialBehavior)
         {
-            this.home.Disable();
+			this.Home.Disable();
         }
 
-        if (this.initialBehavior != null)
+		if(this.initialBehavior != null) 
 		{
-			initialBehavior.Enable();
+			this.initialBehavior.Enable();	
 		}
 	}
-
 
 	public void SetPosition(Vector3 position)
 	{
 		// Keep the z-position the same since it determines draw depth
 		position.z = transform.position.z;
 		transform.position = position;
-	} 
-
+	}
 	private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Pacman"))
         {
-            if (this.frightened.enabled)
+            if (this.Frightened.enabled)
             {
 				FindObjectOfType<GameManager>().GhostEaten(this);
             }
@@ -83,6 +89,25 @@ public class Ghost : MonoBehaviour
             }
         }
     }
+
+	//ghosts will choose a lesser direction every x turns as set by difficulty level
+	public void TrackIfDirectionWasOptimal()
+	{
+		if(this.ChooseSuboptimalDirection) //should only hit this after it has taken the best path amongst other options
+		{
+			this.ChooseSuboptimalDirection = false;
+		}
+
+		if(TurnsSinceLastSuboptimalDirection != OptimalDirectionThreshold)
+		{
+			this.TurnsSinceLastSuboptimalDirection++;
+		}
+		else
+		{
+			this.ChooseSuboptimalDirection = true;
+			this.TurnsSinceLastSuboptimalDirection = 0;
+		}
+	}
 
     //void OnTriggerEnter2D(Collider2D collider)
     //{

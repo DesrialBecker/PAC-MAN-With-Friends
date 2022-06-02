@@ -27,7 +27,8 @@ public class UIManager : MonoBehaviour
         livesText.text = "Lives: " + _gm.lives.ToString(); //idk why but this is throwing infinite null reference errors in unity debugger despite working fine. cbf to look into it more this evening
     }
 
-    public enum SceneNumber{
+    public enum SceneNumber
+    {
         Menu,
         Stage1,
         Stage2

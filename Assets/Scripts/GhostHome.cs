@@ -22,17 +22,17 @@ public class GhostHome : GhostBehavior
     {
         if(this.enabled && collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
-            this.ghost.movement.SetDirection(-this.ghost.movement.direction);
+            this.ghost.Movement.SetDirection(-this.ghost.Movement.direction);
         }
     }
     private IEnumerator ExitTransition()
     {
-        //the tru in this SetDirection means that the movement is forced, not checked
-        this.ghost.movement.SetDirection(Vector2.up, true);
+        //the tru in this SetDirection means that the Movement is forced, not checked
+        this.ghost.Movement.SetDirection(Vector2.up, true);
 
         //this turns off collision on the object
-        this.ghost.movement.rigidbody.isKinematic = true;
-        this.ghost.movement.enabled = false;
+        this.ghost.Movement.rigidbody.isKinematic = true;
+        this.ghost.Movement.enabled = false;
 
         //this is where the animation begins for the position of the ghost
         Vector3 position = this.transform.position;
@@ -73,13 +73,13 @@ public class GhostHome : GhostBehavior
 
 
 
-        this.ghost.movement.enabled = false;
+        this.ghost.Movement.enabled = false;
         // inside of Vecor2 we aare using random to check on a roll. If the value is greater than 0.5f then we set the direction
         // to left(1.0f) if the value is less than 0.5f we set the direction to right(0.0f)
-        this.ghost.movement.SetDirection(new Vector2(Random.value <= 0.5f ? 1.0f : 1.0f, 0.0f), true);
-        this.ghost.movement.rigidbody.isKinematic = false;
-        this.ghost.movement.enabled = true;
-        this.ghost.scatter.Enable();
+        this.ghost.Movement.SetDirection(new Vector2(Random.value <= 0.5f ? 1.0f : 1.0f, 0.0f), true);
+        this.ghost.Movement.rigidbody.isKinematic = false;
+        this.ghost.Movement.enabled = true;
+        this.ghost.Scatter.Enable();
        
     }
 }

@@ -15,4 +15,21 @@ public class GhostFrightened : GhostBehavior
     {
         
     }
+
+    private void OnDisable()
+    {
+        this.ghost.Scatter.Enable();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Node node = other.GetComponent<Node>();
+
+        if (node != null && this.enabled && !this.ghost.Frightened.enabled)
+        {
+            var direction = this.ghost.Movement.CalculateNewGhostDirection(node, this.ghost);
+            this.ghost.Movement.SetDirection(direction); //assigns direction to ghost
+        }
+    }
+
 }

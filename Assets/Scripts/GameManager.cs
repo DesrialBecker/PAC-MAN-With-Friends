@@ -19,9 +19,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Transform clydeRespawnPoint;
     [SerializeField] public Transform pinkyRespawnPoint;
     [SerializeField] public Transform inkyRespawnPoint;
+
     public int lives { get; set; }
     public int score { get; set; }
-    public int combo { get; set; } = 1;
+    public int combo { get; set; }
+    public int DifficultyLevel { get; set; } //TODO: abstract to non-numeric levels and a difficulty setter method that sets ghosts intelligence individually
 
     public void Start()
     {
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
     {
         SetScore(0);
         SetLives(3);
+        SetDifficulty(3);
         NewRound();
     }
 
@@ -58,7 +61,7 @@ public class GameManager : MonoBehaviour
 
         //ghosts = FindObjectsOfType<Ghost>().ToList();
         ResetState();
-        combo = 1;
+        ResetCombo();
     }
 
     private void SpawnFruit()
@@ -83,7 +86,6 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < this.ghosts.Length; i++)
         {
-
             this.ghosts[i].ResetState();
         }
         this.pacman.gameObject.SetActive(true);
@@ -191,10 +193,15 @@ public class GameManager : MonoBehaviour
         this.lives = lives;
     }
 
+    private void SetDifficulty(int difficulty)
+	{
+        this.DifficultyLevel = difficulty;
+	}
+
     public void GhostEaten(Ghost ghost)
     {
-        int points = ghost.pointValue * combo;
-        AddScore(ghost.pointValue);
+        int points = ghost.PointValue * combo;
+        AddScore(ghost.PointValue);
         combo++;
         Invoke(nameof(ResetCombo), 10.0f);
     }
@@ -213,7 +220,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (Ghost ghost in ghosts)
         {
-            ghost.frightened.Enable();
+            ghost.Frightened.Enable();
         }
         this.AddScore(PowerPellet.pointValue);
 
@@ -224,7 +231,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (Ghost ghost in ghosts)
         {
-            ghost.chase.Enable();
+            ghost.Chase.Enable();
         }
     }
 
