@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Transform clydeRespawnPoint;
     [SerializeField] public Transform pinkyRespawnPoint;
     [SerializeField] public Transform inkyRespawnPoint;
+    public PowerPellet powerPellet1;
 
     public int lives { get; set; }
     public int score { get; set; }
@@ -220,11 +221,13 @@ public class GameManager : MonoBehaviour
     {
         foreach (Ghost ghost in ghosts)
         {
-            ghost.Frightened.Enable();
+            ghost.Frightened.Enable(powerPellet1.duration);
         }
         this.AddScore(PowerPellet.pointValue);
 
-        Invoke(nameof(ChangeGhostStateToChase), 10.0f);
+        //I do not think that we need this but we might have to. OnDisable inside of GhostFrightened already does this
+        //
+        //Invoke(nameof(ChangeGhostStateToChase), 10.0f);
     }
 
     public void ChangeGhostStateToChase()

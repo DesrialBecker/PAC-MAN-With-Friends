@@ -119,8 +119,8 @@ GameObject:
   - component: {fileID: 3195561716420428295}
   - component: {fileID: 1838946155416894431}
   - component: {fileID: 12653093399256665}
-  - component: {fileID: -9132716071018753336}
   - component: {fileID: -5261486730020640965}
+  - component: {fileID: -7215464779510267658}
   m_Layer: 7
   m_Name: Ghost_Base
   m_TagString: Untagged
@@ -242,19 +242,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 20
---- !u!114 &-9132716071018753336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5529792927934879720}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac7584bf0fe40fb4d8431194af8bb7f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 8
 --- !u!114 &-5261486730020640965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +255,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0
+  inside: {fileID: 0}
+  outside: {fileID: 0}
+--- !u!114 &-7215464779510267658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5529792927934879720}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac7584bf0fe40fb4d8431194af8bb7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0
+  body: {fileID: 1639234783408483265}
+  eyes: {fileID: 7482884148865763023}
+  blue: {fileID: 3860380904875814673}
+  white: {fileID: 8981627980493220850}
 --- !u!1 &6661383890889872352
 GameObject:
   m_ObjectHideFlags: 0

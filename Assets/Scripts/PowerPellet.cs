@@ -18,6 +18,7 @@ public class PowerPellet : MonoBehaviour
 		{
 			_gm.PowerPelletEaten();
 			Destroy(this.gameObject);
+
 		}
 	}
 }
