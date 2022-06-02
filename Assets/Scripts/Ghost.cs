@@ -19,6 +19,8 @@ public class Ghost : MonoBehaviour
 	public Transform target; //This is the object that the ghost will be targeting -CM 6/1/2022
 	public int PointValue { get; set; } = 200;
 
+	private GameManager _gm;
+
 	//public GhostState State;
 
 	private void Awake()
@@ -42,23 +44,23 @@ public class Ghost : MonoBehaviour
 	{
 		gameObject.SetActive(true);
 		initialBehavior.Enable();
-		movement.ResetState();
+		Movement.ResetState();
 
-		frightened.Disable();
-		chase.Disable();
-		scatter.Enable();
+		Frightened.Disable();
+		Chase.Disable();
+		Scatter.Enable();
 
 		TurnsSinceLastSuboptimalDirection = 0;
 		ChooseSuboptimalDirection = false;
 
-		if (home == this.initialBehavior)
+		if (Home == this.initialBehavior)
 		{
-			this.home.Enable();
+			this.Home.Enable();
 		}
 
-		if (this.home != this.initialBehavior)
+		if (this.Home != this.initialBehavior)
         {
-			this.home.Disable();
+			this.Home.Disable();
         }
 
 		if(this.initialBehavior != null) 

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -62,56 +61,67 @@ public class Movement : MonoBehaviour
     public Vector2 CalculateNewGhostDirection(Node node, Ghost ghost)
 	{
         Vector2 directionToTravel = Vector2.zero; //set direction to zero (which is like null)
-        Vector2 shortestDirectionToTarget = Vector2.zero;
 
-        Dictionary<Vector2, float> availableDirectionsWithDistance = new Dictionary<Vector2, float>(); //stores the potential directions for AI decision making
-        float minDistance = float.MaxValue; //set minDistance to highest possible value
-
+        List<KeyValuePair<Vector2, float>> availableDirectionsWithDistance = new List<KeyValuePair<Vector2, float>>(); //stores the potential directions for AI decision making
         if(node.availableDirections.Count() > 1)
 		{
             var previousDirection = -ghost.Movement.direction;
             node.availableDirections.Remove(previousDirection);
 		}
 
-        foreach(Vector2 direction in node.availableDirections) //check all available directions
+        //find optimal direction and populate available direction list
+        float minDistance = float.MaxValue; //set minDistance to highest possible value since all comparisons will be of smaller numbers
+        float maxDistance = float.MinValue;
+        Vector2 optimalDirectionToTarget = Vector2.zero;
+        foreach(Vector2 direction in node.availableDirections)
         {
             Vector3 newPosition = this.transform.position + new Vector3(direction.x, direction.y, 0.0f); //get each new positions coordinates
 
             float distance = (ghost.target.position - newPosition).sqrMagnitude; //get the distnace of pacman (target) and our position option
 
-            if (distance < minDistance) //assign new shortest distance
-            {
-                shortestDirectionToTarget = direction;
+            if(ghost.Chase.enabled && distance < minDistance)
+			{
+                optimalDirectionToTarget = direction;
                 minDistance = distance;
+			}
+            if (ghost.Frightened.enabled && distance > maxDistance)
+            {
+                optimalDirectionToTarget = direction;
+                maxDistance = distance;
             }
 
-            availableDirectionsWithDistance.Add(direction, distance);
+            availableDirectionsWithDistance.Add(new KeyValuePair<Vector2, float>(newPosition, distance));
         }
         
-        if(node.availableDirections.Count() > 1)
+        //choose direction based on difficulty settings
+        if(node.availableDirections.Count() == 1 || !ghost.ChooseSuboptimalDirection) //if there is only 1 direction or the int-your-team flag isn't set
 		{
-            if (ghost.ChooseSuboptimalDirection)
-			{
-                var suboptimalDirections = availableDirectionsWithDistance.Where(x => x.Value != minDistance).ToList();
-                if (suboptimalDirections.Any())
-				{
-                    directionToTravel = suboptimalDirections.ElementAt(Random.Range(0, suboptimalDirections.Count() - 1)).Key;
-                }
-			}
-			else
-			{
-                directionToTravel = shortestDirectionToTarget;
-            }
-		}
+            directionToTravel = optimalDirectionToTarget;
+        }
 		else
 		{
-            directionToTravel = shortestDirectionToTarget;
-		}
+            List<KeyValuePair<Vector2, float>> suboptimalDirections = new List<KeyValuePair<Vector2, float>>();
+            if (ghost.Chase.enabled)
+            {
+                suboptimalDirections = availableDirectionsWithDistance.Where(x => x.Value != minDistance).ToList();
+            }
+            if (ghost.Frightened.enabled)
+            {
+                suboptimalDirections = availableDirectionsWithDistance.Where(x => x.Value != maxDistance).ToList();
+            }
 
-        ghost.TrackIfDirectionWasOptimal();
+            if (suboptimalDirections.Any())
+            {
+                directionToTravel = suboptimalDirections.ElementAt(Random.Range(0, suboptimalDirections.Count() - 1)).Key;
+            }
+        }
+
+        ghost.TrackIfDirectionWasOptimal(); //adjust direction decision flag for difficulty
 
         return directionToTravel;
     }
+
+
 
     public void SetDirection(Vector2 direction, bool forced = false)
     {
