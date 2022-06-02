@@ -4,15 +4,74 @@ using UnityEngine;
 
 public class GhostHome : GhostBehavior
 {
-    // Start is called before the first frame update
-    void Start()
+    public Transform inside;
+
+    public Transform outside;
+
+    private void OnEnable()
     {
-        
+        StopAllCoroutines();//this is just for safety to make sure that there is nothing that will ruin our kinematic.enable=false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        StartCoroutine(ExitTransition());
+    }
+    private IEnumerator ExitTransition()
+    {
+        //the tru in this SetDirection means that the movement is forced, not checked
+        this.ghost.movement.SetDirection(Vector2.up, true);
+
+        //this turns off collision on the object
+        this.ghost.movement.rigidbody.isKinematic = true;
+        this.ghost.movement.enabled = false;
+
+        //this is where the animation begins for the position of the ghost
+        Vector3 position = this.transform.position;
+
+        float duration = duration = 0.5f;
+
+        float elapsed = 0.0f;
+
+        //this loop is to go from this.position(will be somewhere in the box) =to inside.position
+        while(elapsed < duration)
+        {
+                // we take the position of the ghost when inside of the box,and interpolate for elapsed/duration to get a time
+                // once elapsed/duration=1 this will let us know that our position == this.inside.position, so we are ready to start exiting
+                        //this is why we use the while loop
+            Vector3 newPosition = Vector3.Lerp(position, this.inside.position, elapsed/duration);
+            newPosition.z = position.z;// we dont want z to change
+            this.ghost.transform.position = newPosition;
+            elapsed += Time.deltaTime;//we use deltatime because it takes in consideration Framerate
+            yield return null;// with the deltatime being used we will recheck this while loop every frame
+        }
+
+        elapsed = 0.0f;//this lets us start the new Transform
+
+        //this while loop is to go from inside.position => outside.position
+        while (elapsed < duration)
+        {
+            // we take the position of the ghost when inside of the box,and interpolate for elapsed/duration to get a time
+            // once elapsed/duration=1 this will let us know that our position == this.outside.position, so we are ready to start exiting
+            //this is why we use the while loop
+            Vector3 newPosition = Vector3.Lerp(this.inside.position, this.outside.position, elapsed / duration);
+            newPosition.z = position.z;// we dont want z to change
+            this.ghost.transform.position = newPosition;
+            elapsed += Time.deltaTime;//we use deltatime because it takes in consideration Framerate
+            yield return null;// with the deltatime being used we will recheck this while loop every frame
+        }
+
+
+
+
+
+        this.ghost.movement.enabled = false;
+        // inside of Vecor2 we aare using random to check on a roll. If the value is greater than 0.5f then we set the direction
+        // to left(1.0f) if the value is less than 0.5f we set the direction to right(0.0f)
+        this.ghost.movement.SetDirection(new Vector2(Random.value <= 0.5f ? 1.0f : 1.0f, 0.0f), true);
+        this.ghost.movement.rigidbody.isKinematic = false;
+        this.ghost.movement.enabled = true;
+        this.ghost.scatter.Enable();
+       
     }
 }

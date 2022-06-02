@@ -10,6 +10,7 @@ public class GhostScatter : GhostBehavior
     private void OnDisable()
     {
         this.ghost.chase.Enable();
+
     }
 
     //this gets the reference to the exact node we are colliding with.
