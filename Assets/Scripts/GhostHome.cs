@@ -17,6 +17,14 @@ public class GhostHome : GhostBehavior
     {
         StartCoroutine(ExitTransition());
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(this.enabled && collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        {
+            this.ghost.movement.SetDirection(-this.ghost.movement.direction);
+        }
+    }
     private IEnumerator ExitTransition()
     {
         //the tru in this SetDirection means that the movement is forced, not checked
