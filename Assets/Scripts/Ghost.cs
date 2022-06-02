@@ -28,6 +28,7 @@ public class Ghost : MonoBehaviour
 		this.Scatter = GetComponent<GhostScatter>();
 		this.Chase = GetComponent<GhostChase>();
 		this.Frightened = GetComponent<GhostFrightened>();
+		_gm = GetComponent<GameManager>();
 		//State = GhostState.Waiting;
 	}
 
@@ -39,20 +40,25 @@ public class Ghost : MonoBehaviour
 
 	public void ResetState()
 	{
-		this.gameObject.SetActive(true);
-		this.Movement.ResetState();
+		gameObject.SetActive(true);
+		initialBehavior.Enable();
+		movement.ResetState();
 
-		this.Frightened.Disable();
-		this.Chase.Disable();
-		this.Scatter.Enable();
-		this.Home.Disable();
+		frightened.Disable();
+		chase.Disable();
+		scatter.Enable();
 
 		TurnsSinceLastSuboptimalDirection = 0;
 		ChooseSuboptimalDirection = false;
 
-		if (this.Home != this.initialBehavior)
+		if (home == this.initialBehavior)
+		{
+			this.home.Enable();
+		}
+
+		if (this.home != this.initialBehavior)
         {
-			this.Home.Disable();
+			this.home.Disable();
         }
 
 		if(this.initialBehavior != null) 
@@ -61,7 +67,13 @@ public class Ghost : MonoBehaviour
 		}
 	}
 
-    private void OnCollisionEnter2D(Collision2D collision)
+	public void SetPosition(Vector3 position)
+	{
+		// Keep the z-position the same since it determines draw depth
+		position.z = transform.position.z;
+		transform.position = position;
+	}
+	private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Pacman"))
         {
