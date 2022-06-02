@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -17,6 +18,8 @@ public class Movement : MonoBehaviour
     public Vector2 nextDirection { get; private set; }
     public Vector3 startingPosition { get; private set; }
 
+    private GameManager _gm;
+
 
     private void Awake()
     {
@@ -27,6 +30,7 @@ public class Movement : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         ResetState();
+        _gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public void ResetState()
@@ -53,6 +57,60 @@ public class Movement : MonoBehaviour
         Vector2 position = this.rigidbody.position;
         Vector2 translation = this.direction * this.speed * this.speedMultiplier * Time.fixedDeltaTime;
         this.rigidbody.MovePosition(position + translation);
+    }
+
+    public Vector2 CalculateNewGhostDirection(Node node, Ghost ghost)
+	{
+        Vector2 directionToTravel = Vector2.zero; //set direction to zero (which is like null)
+        Vector2 shortestDirectionToTarget = Vector2.zero;
+
+        Dictionary<Vector2, float> availableDirectionsWithDistance = new Dictionary<Vector2, float>(); //stores the potential directions for AI decision making
+        float minDistance = float.MaxValue; //set minDistance to highest possible value
+
+        if(node.availableDirections.Count() > 1)
+		{
+            var previousDirection = -ghost.Movement.direction;
+            node.availableDirections.Remove(previousDirection);
+		}
+
+        foreach(Vector2 direction in node.availableDirections) //check all available directions
+        {
+            Vector3 newPosition = this.transform.position + new Vector3(direction.x, direction.y, 0.0f); //get each new positions coordinates
+
+            float distance = (ghost.target.position - newPosition).sqrMagnitude; //get the distnace of pacman (target) and our position option
+
+            if (distance < minDistance) //assign new shortest distance
+            {
+                shortestDirectionToTarget = direction;
+                minDistance = distance;
+            }
+
+            availableDirectionsWithDistance.Add(direction, distance);
+        }
+        
+        if(node.availableDirections.Count() > 1)
+		{
+            if (ghost.ChooseSuboptimalDirection)
+			{
+                var suboptimalDirections = availableDirectionsWithDistance.Where(x => x.Value != minDistance).ToList();
+                if (suboptimalDirections.Any())
+				{
+                    directionToTravel = suboptimalDirections.ElementAt(Random.Range(0, suboptimalDirections.Count() - 1)).Key;
+                }
+			}
+			else
+			{
+                directionToTravel = shortestDirectionToTarget;
+            }
+		}
+		else
+		{
+            directionToTravel = shortestDirectionToTarget;
+		}
+
+        ghost.TrackIfDirectionWasOptimal();
+
+        return directionToTravel;
     }
 
     public void SetDirection(Vector2 direction, bool forced = false)

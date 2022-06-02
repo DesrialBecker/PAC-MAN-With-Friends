@@ -9,7 +9,7 @@ public class GhostScatter : GhostBehavior
     //Unity looks for OnDisable every time a script is diabled in an object
     private void OnDisable()
     {
-        this.ghost.chase.Enable();
+        this.ghost.Chase.Enable();
     }
 
     //this gets the reference to the exact node we are colliding with.
@@ -21,13 +21,11 @@ public class GhostScatter : GhostBehavior
     {
         Node node = other.GetComponent<Node>();
 
-        if(node != null && this.enabled && !this.ghost.frightened.enabled)
+        if(node != null && this.enabled && !this.ghost.Frightened.enabled)
         {
             int index = Random.Range(0, node.availableDirections.Count);//moves a random direction that is available
 
-            if(node.availableDirections[index] == -this.ghost.movement.direction && node.availableDirections.Count >1)
-                                        //will not allow the ghost to return back down the
-                                        //direction they came from.
+            if(node.availableDirections[index] == -this.ghost.Movement.direction && node.availableDirections.Count > 1) //do not allow returning in the direction they came from
             {
                 index++;
                 if (index >= node.availableDirections.Count)
@@ -35,7 +33,7 @@ public class GhostScatter : GhostBehavior
                     index = 0;
                 }
             }
-            this.ghost.movement.SetDirection(node.availableDirections[index]);//this is where the movement finally happens
+            this.ghost.Movement.SetDirection(node.availableDirections[index]);//this is where the movement finally happens
         }
     }
 }
